@@ -1,4 +1,3 @@
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -6,22 +5,23 @@
 #         self.next = next
 class Solution:
     def removeElements(self, head: ListNode, val: int) -> ListNode:
-
+        
         # Method 1
-
-        while head.val == val:
-            head = head.next
-        temp = head
-        while temp and temp.next:
-            if temp.next == val:
-                temp.next = temp.next.next
-                temp = temp.next.next
+        
+        if not head:
+            return None
+        dummy = ListNode(float('inf'))
+        temp = dummy
+        dummy.next = head
+        while dummy and dummy.next:
+            if dummy.next.val == val:
+                dummy.next = dummy.next.next
             else:
-                temp = temp.next
-        return head
-
+                dummy = dummy.next
+        return temp.next
+    
         # Method 2: Recursively
-
+        
         if not head:
             return None
         if head.val == val:
@@ -29,4 +29,4 @@ class Solution:
         else:
             head.next = self.removeElements(head.next,val)
         return head
-
+        
